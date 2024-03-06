@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Environment } from '../../../environment';
 
 const API_URL = Environment.URL_BASE;
+const token = localStorage.getItem('userToken');
 
 const AuthService = {
   login(email, password) {
@@ -13,6 +14,18 @@ const AuthService = {
         }
         return response.data;
       });
+  },
+
+  async getById(id) {
+    try {
+      const response = await axios.get(`${API_URL}/user/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao obter Usuario:', error);
+      throw new Error('Erro ao obter Usuario da API.');
+    }
   },
 
   logout() {

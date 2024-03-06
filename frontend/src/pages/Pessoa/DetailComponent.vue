@@ -187,7 +187,7 @@ export default {
       nome: '',
       idade: '',
       email: '',
-      senha: '',
+      password: '',
       grupo_pessoa_id: '',
       genero: '',
       user_id: '',
@@ -204,10 +204,13 @@ export default {
             const { pessoa } = result;
             formData.nome = pessoa.nome;
             formData.idade = pessoa.idade;
-            formData.email = pessoa.email;
-            formData.senha = pessoa.senha;
             formData.grupo_pessoa_id = pessoa.grupo_pessoa_id;
             formData.genero = pessoa.genero;
+
+            AuthService.getById(pessoa.user_id).then(result => {
+              const { user } = result;
+              formData.email = user.email;
+            })
           }
         });
       } else {

@@ -47,7 +47,7 @@ export default {
           this.email = '';
           this.password = '';
           this.$router.replace('/home');
-          window.history.pushState({}, document.title, window.location.pathname);
+          
         })
         .catch(error => {
           console.error('Erro ao fazer login:', error);
